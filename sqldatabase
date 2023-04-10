@@ -1,0 +1,57 @@
+CREATE TABLE `Artist` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`first_name` varchar(250) NOT NULL,
+	`last_name` varchar(250) NOT NULL,
+	`Date_of_Birth` DATE NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `Songs` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`Title` varchar(250) NOT NULL,
+	`Artist` INT NOT NULL,
+	`Duration` INT NOT NULL,
+	`Genre` INT NOT NULL,
+	`Explicit` BOOLEAN NOT NULL,
+	`Link` varchar(250) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `User` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`Email` varchar(250) NOT NULL,
+	`first_name` varchar(250) NOT NULL,
+	`last_name` varchar(250) NOT NULL,
+	`Password` varchar(250) NOT NULL,
+	`Favorite Song` INT NOT NULL,
+	`Playlist` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `Genre` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`Name` varchar(250),
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `Playlist` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`Song ID` INT(250) NOT NULL,
+	`User ID` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+ALTER TABLE `Songs` ADD CONSTRAINT `Songs_fk0` FOREIGN KEY (`Artist`) REFERENCES `Artist`(`id`);
+
+ALTER TABLE `Songs` ADD CONSTRAINT `Songs_fk1` FOREIGN KEY (`Genre`) REFERENCES `Genre`(`id`);
+
+ALTER TABLE `User` ADD CONSTRAINT `User_fk0` FOREIGN KEY (`Playlist`) REFERENCES `Playlist`(`id`);
+
+ALTER TABLE `Playlist` ADD CONSTRAINT `Playlist_fk0` FOREIGN KEY (`Song ID`) REFERENCES `Songs`(`id`);
+
+ALTER TABLE `Playlist` ADD CONSTRAINT `Playlist_fk1` FOREIGN KEY (`User ID`) REFERENCES `User`(`id`);
+
+
+
+
+
